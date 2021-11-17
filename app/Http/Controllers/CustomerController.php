@@ -17,8 +17,7 @@ class CustomerController extends Controller
     {
         $listCustomer = Customer::all();
 
-
-        return $listCustomer;
+        return json_encode ($listCustomer);
     }
 
     /**
@@ -92,6 +91,6 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $id;
     }
 }

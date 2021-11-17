@@ -14,3 +14,5 @@ Route::post('/customer', [CustomerController::class, 'store']);
 
 
 Route::get('/customerlist', [CustomerController::class, 'index']);
+
+Route::get('/customerdelete/{id}', [CustomerController::class, 'destroy']);
