@@ -15,9 +15,9 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $listCustomer = Customer::all();
+        $listCustomer = Customer::where('ativo', 0)->get();
 
-        return json_encode ($listCustomer);
+        return json_encode($listCustomer);
     }
 
     /**
@@ -43,10 +43,9 @@ class CustomerController extends Controller
 
         $customer->nome = $request->nome;
         $customer->endereco = $request->endereco;
+        $customer->email = $request->email;
 
         $customer->save();
-
-        return $request;
     }
 
     /**
@@ -57,7 +56,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::find($id);
+
+        return $customer;
     }
 
     /**
@@ -80,7 +81,8 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Customer::where('id', $id)
+            ->update(['nome' => $request->nome, 'endereco' => $request->endereco]);
     }
 
     /**
@@ -91,6 +93,9 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
+        Customer::where('id', $id)
+            ->update(['ativo' => 1]);
+
         return $id;
     }
 }
